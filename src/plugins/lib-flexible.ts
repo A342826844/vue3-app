@@ -66,14 +66,12 @@
     }
   
     function refreshRem(){
-        console.log(21212);
         var width = docEl.getBoundingClientRect().width;
         var height = docEl.getBoundingClientRect().height;
         var baseWidth = width < height ? width : height;
         if (baseWidth / dpr > 540) {
             baseWidth = 540 * dpr;
         }
-        console.log(height)
         var rem = baseWidth / 10;
         docEl.style.fontSize = rem + 'px';
         flexible.rem = (win as any).rem = rem;

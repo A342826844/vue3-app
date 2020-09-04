@@ -3,8 +3,10 @@ import { RouteRecordRaw } from 'vue-router';
 import home from '../views/home/index.vue';
 import future from '../views/future/index.vue';
 import spot from '../views/spot/index.vue';
-import assets from '../views/assets/index.vue';
+// import assets from '../views/assets/index.vue';
 import option from '../views/option/index.vue';
+
+const assets = () => import('../views/assets/index.vue');
 
 const routes: Array<RouteRecordRaw> = [
     {

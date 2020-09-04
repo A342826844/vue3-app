@@ -1,12 +1,7 @@
 <template>
     <div id="main">
-        <!-- <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
-        </div>
-        <router-view/> -->
         <Layout></Layout>
-        test
+        <Loading/>
     </div>
 </template>
 
@@ -14,12 +9,14 @@
 import { defineComponent } from 'vue';
 
 // eslint-disable-next-line import/no-unresolved
-import Layout from '@/views/layout/index.vue'; // @ is an alias to /src
+import Layout from '@/views/layout/index.vue';
+import Loading from '@/components/loading/index.vue';
 
 export default defineComponent({
     name: 'app',
     components: {
         Layout,
+        Loading,
     },
 });
 </script>

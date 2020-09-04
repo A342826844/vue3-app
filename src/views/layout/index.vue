@@ -12,11 +12,11 @@
             <div class="ui-flex nav-boxs">
                 <div
                     :class="{critop: key===2}"
-                    @click="linkTo(item)"
+                    @click="linkTo(item, index)"
                     :title="item.title"
                     class="flex__item nav-box"
-                    v-for="(item,key) in tabList"
-                    :key="key"
+                    v-for="(item, index) in tabList"
+                    :key="index"
                 >
                     <img class="tar-icon" :src="item.defaultIcon" :alt="item.title" v-if="item.name !== route.meta.name">
                     <img class="tar-icon" :src="item.activeIcon" :alt="item.title" v-if="item.name === route.meta.name">
@@ -29,20 +29,22 @@
 
 <script lang="ts">
 import {
-    defineComponent, ref, computed, reactive,
+    defineComponent, ref, computed, reactive, onMounted, Ref,
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
-import homeN from '@/assets/img/layout/home_n.png';
-import homeS from '@/assets/img/layout/home_s.gif';
-import contractN from '@/assets/img/layout/contract_n.png';
-import contractS from '@/assets/img/layout/contract_s.gif';
-import spotN from '@/assets/img/layout/spot_n.png';
-import spotS from '@/assets/img/layout/spot_s.gif';
-import optionN from '@/assets/img/layout/option_n.png';
-import optionS from '@/assets/img/layout/option_s.gif';
-import assetsN from '@/assets/img/layout/assets_n.png';
-import assetsS from '@/assets/img/layout/assets_s.gif';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const homeN = require('@/assets/img/layout/home_n.png');
+const homeS = require('@/assets/img/layout/home_s.gif');
+const contractN = require('@/assets/img/layout/contract_n.png');
+const contractS = require('@/assets/img/layout/contract_s.gif');
+const spotN = require('@/assets/img/layout/spot_n.png');
+const spotS = require('@/assets/img/layout/spot_s.gif');
+const optionN = require('@/assets/img/layout/option_n.png');
+const optionS = require('@/assets/img/layout/option_s.gif');
+const assetsN = require('@/assets/img/layout/assets_n.png');
+const assetsS = require('@/assets/img/layout/assets_s.gif');
 
 interface LinkItem {
     path: string;
@@ -57,7 +59,13 @@ export default defineComponent({
     setup() {
         const test = ref(1);
 
+        const store = useStore();
+
+        const top = ref();
+
         const route = useRoute();
+
+        const footer: Ref = ref(null);
 
         const router = useRouter();
 
@@ -95,10 +103,40 @@ export default defineComponent({
             },
         ]);
 
+        onMounted(() => {
+            let timer = 0;
+            // const { clientWidth } = document.documentElement;
+            const { clientHeight } = document.documentElement;
+            let footerHeight = footer.value.clientHeight;
+            top.value = `${clientHeight - footerHeight}px`;
+            const resizeHandle = () => {
+                const clientWidthNow = document.documentElement.clientHeight;
+                // const clientHeightNow = document.documentElement;
+                if (footer.value && (clientHeight - clientWidthNow <= clientHeight * 0.25)) {
+                    if (!footerHeight) {
+                        footerHeight = footer.value.clientHeight;
+                    }
+                    top.value = `${clientWidthNow - footerHeight}px`;
+                }
+            };
+
+            window.addEventListener('resize', () => {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    resizeHandle();
+                }, 100);
+            });
+        });
+
         const activeName = computed(() => useRoute());
 
-        const linkTo = (item: LinkItem) => {
-            console.log(item);
+        const linkTo = (item: LinkItem, index: number) => {
+            store.commit('changeLoading', true);
+            setTimeout(() => {
+                store.commit('changeLoading', false);
+            }, 2000);
+            console.log(tabList, tabList[index].activeIcon);
+            tabList[index].activeIcon = item.activeIcon;
             router.push(item.path);
         };
         return {
@@ -107,6 +145,8 @@ export default defineComponent({
             route,
             activeName,
             tabList,
+            top,
+            footer,
         };
     },
 });
