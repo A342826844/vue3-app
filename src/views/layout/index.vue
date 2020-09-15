@@ -11,12 +11,12 @@
             <div class="circle"></div>
             <div class="ui-flex nav-boxs">
                 <div
-                    :class="{critop: key===2}"
+                    :class="{critop: index===2}"
                     @click="linkTo(item, index)"
                     :title="item.title"
                     class="flex__item nav-box"
                     v-for="(item, index) in tabList"
-                    :key="index"
+                    :key="item.name"
                 >
                     <img
                         class="tar-icon"
@@ -36,6 +36,8 @@ import {
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+
+// import { getTestData } from '@/api';
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const homeN = require('@/assets/img/layout/home_n.png');
@@ -106,6 +108,12 @@ export default defineComponent({
             },
         ]);
 
+        // getTestData({}).then((res) => {
+        //     console.log(res);
+        // }).catch((err) => {
+        //     console.error(err);
+        // });
+
         onMounted(() => {
             let timer = 0;
             // const { clientWidth } = document.documentElement;
@@ -132,8 +140,6 @@ export default defineComponent({
         });
 
         const activeName = computed(() => useRoute());
-
-        const a = 1;
 
         const linkTo = (item: LinkItem, index: number) => {
             store.commit('changeLoading', true);

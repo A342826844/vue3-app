@@ -18,5 +18,6 @@ module.exports = {
         'vue/no-parsing-error': [2, { 'x-invalid-end-tag': false }],
         indent: ['error', 4],
         'max-len': ['error', { code: 150 }],
+        '@typescript-eslint/no-explicit-any': ['off'], // 应许使用any类型
     },
 };
