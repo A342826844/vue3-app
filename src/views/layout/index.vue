@@ -133,6 +133,8 @@ export default defineComponent({
 
         const activeName = computed(() => useRoute());
 
+        const a = 1;
+
         const linkTo = (item: LinkItem, index: number) => {
             store.commit('changeLoading', true);
             setTimeout(() => {
