@@ -18,8 +18,11 @@
                     v-for="(item, index) in tabList"
                     :key="index"
                 >
-                    <img class="tar-icon" :src="item.defaultIcon" :alt="item.title" v-if="item.name !== route.meta.name">
-                    <img class="tar-icon" :src="item.activeIcon" :alt="item.title" v-if="item.name === route.meta.name">
+                    <img
+                        class="tar-icon"
+                        :src="item.name !== route.meta.name ? item.defaultIcon : item.activeIcon "
+                        :alt="item.title"
+                    >
                     <p class="nav-label" :style="{color: item.name !== route.meta.name ? '' : '#333333'}">{{item.title}}</p>
                 </div>
             </div>
