@@ -46,7 +46,7 @@ axiosOfJava.interceptors.request.use(
 // Add a response interceptor
 axiosOfJava.interceptors.response.use(
     (response) => {
-        if (response.data.status !== 200) {
+        if (response.data.code !== 200) {
             return Promise.reject(response.data);
         }
         return response;
@@ -74,7 +74,7 @@ axiosOfGoLang.interceptors.request.use(
 // Add a response interceptor
 axiosOfGoLang.interceptors.response.use(
     (response) => {
-        if (response.data.status !== 200) {
+        if (response.data.code !== 200) {
             return Promise.reject(response.data);
         }
         return response.data;

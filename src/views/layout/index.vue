@@ -37,8 +37,6 @@ import {
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
-// import { getTestData } from '@/api';
-
 /* eslint-disable @typescript-eslint/no-var-requires */
 const homeN = require('@/assets/img/layout/home_n.png');
 const homeS = require('@/assets/img/layout/home_s.gif');
@@ -100,19 +98,13 @@ export default defineComponent({
                 defaultIcon: optionN,
                 activeIcon: optionS,
             }, {
-                path: '/assets',
-                name: 'assets',
+                path: '/login',
+                name: 'login',
                 title: '资产',
                 defaultIcon: assetsN,
                 activeIcon: assetsS,
             },
         ]);
-
-        // getTestData({}).then((res) => {
-        //     console.log(res);
-        // }).catch((err) => {
-        //     console.error(err);
-        // });
 
         onMounted(() => {
             let timer = 0;

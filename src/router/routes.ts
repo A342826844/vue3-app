@@ -6,6 +6,8 @@ import spot from '../views/spot/index.vue';
 // import assets from '../views/assets/index.vue';
 import option from '../views/option/index.vue';
 
+import login from '../views/login/index.vue';
+
 const assets = () => import('../views/assets/index.vue');
 
 const routes: Array<RouteRecordRaw> = [
@@ -24,6 +26,11 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
             name: 'future',
         },
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: login,
     },
     {
         path: '/spot',
