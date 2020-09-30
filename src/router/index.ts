@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, onBeforeRouteUpdate } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import routes from './routes';
 
 const router = createRouter({
@@ -6,19 +6,19 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from, next) => {
-    console.log('beforeEach');
-    next();
-});
+// router.beforeEach((to, from, next) => {
+//     console.log('beforeEach');
+//     next();
+// });
 
-router.afterEach((to, from) => {
-    console.log('afterEach');
-    console.log(from);
-});
+// router.afterEach((to, from) => {
+//     console.log('afterEach');
+//     console.log(from);
+// });
 
-router.beforeResolve((to, from, next) => {
-    console.log('beforeResolve');
-    next();
-});
+// router.beforeResolve((to, from, next) => {
+//     console.log('beforeResolve');
+//     next();
+// });
 
 export default router;

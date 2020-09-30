@@ -39,7 +39,6 @@ export default defineComponent({
             if (props.type === 'component') {
                 return props.loading;
             }
-            console.log(store);
             return store.state.loading;
         });
 

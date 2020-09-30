@@ -12,11 +12,16 @@ const assets = () => import('../views/assets/index.vue');
 
 const routes: Array<RouteRecordRaw> = [
     {
+        path: '/',
+        redirect: '/home',
+    },
+    {
         path: '/home',
         name: 'home',
         component: home,
         meta: {
             name: 'home',
+            hasFooter: true,
         },
     },
     {
@@ -25,6 +30,7 @@ const routes: Array<RouteRecordRaw> = [
         component: future,
         meta: {
             name: 'future',
+            hasFooter: true,
         },
     },
     {
@@ -38,6 +44,7 @@ const routes: Array<RouteRecordRaw> = [
         component: spot,
         meta: {
             name: 'spot',
+            hasFooter: true,
         },
     },
     {
@@ -46,6 +53,7 @@ const routes: Array<RouteRecordRaw> = [
         component: assets,
         meta: {
             name: 'assets',
+            hasFooter: true,
         },
     },
     {
@@ -54,6 +62,7 @@ const routes: Array<RouteRecordRaw> = [
         component: option,
         meta: {
             name: 'option',
+            hasFooter: true,
         },
     },
     {

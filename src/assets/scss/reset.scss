@@ -14,9 +14,8 @@ h3,
 h4,
 h5,
 h6,
-figure,
+div,
 form,
-fieldset,
 legend,
 input,
 textarea,
@@ -24,11 +23,10 @@ button,
 p,
 blockquote,
 th,
-td,
-pre,
-xmp {
+td {
     margin: 0;
-    padding: 0
+    padding: 0;
+    box-sizing: border-box;
 }
 
 h1,
@@ -87,6 +85,14 @@ a {
 a {
     text-decoration: none
 }
+::-webkit-input-placeholder {
+    color: #b3b3b3;
+}
+// 去除默认样式
+input {
+    -webkit-appearance:none; 
+}
+
 
 body,
 html {

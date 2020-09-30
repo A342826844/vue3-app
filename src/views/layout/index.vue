@@ -6,8 +6,7 @@
             </keep-alive>
             <router-view v-if="!$route.meta.keepAlive"></router-view>
         </div>
-        <div>{{route.meta.name}}</div>
-        <footer ref="footer" :style="{top: top}" class="layout-nav-footer border-t">
+        <footer v-show="route.meta.hasFooter" ref="footer" :style="{top: top}" class="layout-nav-footer border-t">
             <div class="circle"></div>
             <div class="ui-flex nav-boxs">
                 <div
@@ -107,27 +106,34 @@ export default defineComponent({
         ]);
 
         onMounted(() => {
+            // nextTick(() => {
+            //     console.log(toRaw(route.meta), '==');
+            // });
+            // console.log('onMounted');
+            // // const { clientWidth } = document.documentElement;
+            // console.log(top.value, footer.value.offsetHeight, footer.value.clientHeight, footer.value.scrollHeight);
             let timer = 0;
-            // const { clientWidth } = document.documentElement;
-            const { clientHeight } = document.documentElement;
-            let footerHeight = footer.value.clientHeight;
-            top.value = `${clientHeight - footerHeight}px`;
+            const clientWidthNow = document.documentElement.clientHeight;
             const resizeHandle = () => {
-                const clientWidthNow = document.documentElement.clientHeight;
+                const { clientHeight } = document.documentElement;
+                const footerHeight = footer.value && footer.value.clientHeight;
                 // const clientHeightNow = document.documentElement;
-                if (footer.value && (clientHeight - clientWidthNow <= clientHeight * 0.25)) {
-                    if (!footerHeight) {
-                        footerHeight = footer.value.clientHeight;
-                    }
-                    top.value = `${clientWidthNow - footerHeight}px`;
+                console.log(clientWidthNow - clientHeight, clientHeight * 0.25);
+                if (footer.value && (clientWidthNow - clientHeight <= clientHeight * 0.25)) {
+                    top.value = `${clientHeight - footerHeight}px`;
+                    console.log(top.value);
                 }
             };
-
+            // XXX: 这里的route.meta.hasFooter 值还是undefined 所以用异步的方式去对footer定位
+            setTimeout(() => {
+                resizeHandle();
+            }, 0);
+            // XXX: 解决有些移动设备软键盘弹出后footer跑到软件盘上方
             window.addEventListener('resize', () => {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
                     resizeHandle();
-                }, 100);
+                }, 350);
             });
         });
 
@@ -159,6 +165,10 @@ export default defineComponent({
 
 .layout {
     overflow: hidden;
+    height: 100%;
+    &-route{
+        height: 100%;
+    }
     .layout-nav-footer {
         position: fixed;
         box-shadow: 0px -2px 10px 0px rgba(203, 203, 203, 0.75);
