@@ -38,9 +38,36 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import Schema, { Rules } from 'async-validator';
 import { loginCellphone } from '@/api';
 
 // import './login.scss';
+const descriptor: Rules = {
+    name: {
+        type: 'string',
+        required: true,
+        validator: (rule: any, value: string) => value === 'muji',
+    },
+    age: {
+        type: 'number',
+        asyncValidator: (rule: any, value: number) => new Promise((resolve, reject) => {
+            if (value < 18) {
+                // eslint-disable-next-line prefer-promise-reject-errors
+                reject('too young'); // reject with error message
+            } else {
+                resolve();
+            }
+        }),
+    },
+};
+const validator = new Schema(descriptor);
+// PROMISE USAGE
+validator.validate({ name: 'muji', age: 12 }).then(() => {
+    // validation passed or without error message
+    console.log('ok?');
+}).catch(({ errors, fields }) => {
+    console.log(errors, fields, 'fields');
+});
 
 export default defineComponent({
     name: 'Home',
