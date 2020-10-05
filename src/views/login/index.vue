@@ -1,17 +1,46 @@
 <template>
     <div class="login">
         <Headers value="用户注册" isTransparent theme="dark" />
-        <form @submit.prevent="loginHandle" action="">
-            <input v-model="phone" type="tel">
-            <input v-model="password" type="password">
+        <div class="login-logo">
+            <img src="" alt="">
+        </div>
+        <form class="login-form" @submit.prevent="loginHandle" action="">
+            <div class="login-form-item flex-between-c">
+                <div class="login-form-item-prepend">
+                    <span class="login-form-moblepre">+86</span>
+                </div>
+                <input
+                    class="login-form-item-input flex-item-1"
+                    v-model="phone"
+                    type="tel"
+                    placeholder="请输入手机号"
+                />
+                <span class="login-form-item-after"></span>
+            </div>
+            <div class="login-form-item flex-between-c">
+                <div class="login-form-item-prepend">
+                    <img src="../../assets/img/login/email.png" alt="">
+                </div>
+                <input class="login-form-item-input flex-item-1" v-model="password" type="password">
+                <span class="login-form-item-after"></span>
+            </div>
+            <div class="login-form-item flex-between-c">
+                <input class="login-form-item-input login-submit flex-item-1" value="登录" type="submit">
+                <span class="login-form-item-after"></span>
+            </div>
         </form>
-        <button @click="loginHandle">登录</button>
+        <div class="login-link flex-between-c">
+            <router-link to="/codelogin">验证码登录</router-link>
+            <router-link to="/forgetpass">忘记密码？</router-link>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { loginCellphone } from '@/api';
+
+// import './login.scss';
 
 export default defineComponent({
     name: 'Home',
@@ -44,5 +73,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import url('./login.scss');
+@import './login.scss';
 </style>

@@ -1,8 +1,59 @@
 .login{
     height: 100%;
     background-color: #333333;
-	background-image: url(../../assets/img/login/top-bg.png), url(../../assets/img/login/bottom-bg.png);
-	background-position:  0 0, 0 100%;
-	background-repeat: no-repeat;
-	background-size: 100% auto;
+    background-image: url(../../assets/img/login/top-bg.png), url(../../assets/img/login/bottom-bg.png);
+    background-position:  0 0, 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    &-logo{
+        height: 325px;
+    }
+    &-form{
+		width: 80%;
+		margin: 0 auto;
+		&-moblepre{
+			color: #E1BF81;
+			&::after{
+				content: '';
+				display: inline-block;
+				position: relative;
+				top: 5px;
+				left: 8px;
+				height: 0;
+				width: 0;
+				border: 10px solid transparent;
+				border-top-color: #E1BF81;
+			}
+		}
+        &-item{
+			width: 100%;
+            height: 89px;
+            margin-bottom: 46px;
+            background: #3C3C3C;
+			border-radius: 10px;
+			&-prepend{
+				width: 100px;
+				img{
+					width: 50px;
+				}
+			}
+			&-input{
+				height: 100%;
+				padding-left: 12px;
+				background: transparent;
+				color: #ffffff;
+				&.login-submit{
+					color: #343434;
+					background: linear-gradient(-29deg, #E0B66C, #EECE94);
+				}
+			}
+        }
+	}
+	&-link{
+		width: 80%;
+		margin: 0 auto;
+		a{
+			color: #ffffff;
+		}
+	}
 }

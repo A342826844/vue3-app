@@ -90,7 +90,8 @@ a {
 }
 // 去除默认样式
 input {
-    -webkit-appearance:none; 
+    -webkit-appearance:none;
+    max-width: 100%;
 }
 
 
@@ -99,6 +100,9 @@ html {
     background-color: #f2f2f7;
     height: 100%;
     color: #5a5a5a;
+    a {
+        color: #5a5a5a;
+    }
     /*上下拉动滚动条时卡顿、慢*/
     -webkit-overflow-scrolling : touch;
     // -webkit-overflow-scrolling : auto;
